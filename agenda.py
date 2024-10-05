@@ -19,7 +19,7 @@ def create_contact(contacts):
   
   contacts.append(contact)
 
-  print(f"\nContact {contact_name} was successfully created...")
+  print(f"\nContact {contact_name} was successfully created!")
   return
 
 def show_contacts(contacts):
@@ -53,7 +53,25 @@ def update_contacts(contacts, index):
     else:
       contacts[adjusted_index]["favorite"] = False
         
-    print(f"Contact {new_contact_name} sucessfully updated!")
+    print(f"\nContact {new_contact_name} sucessfully updated!")
+  else:
+    print(f"Contact index {index} is invalid!")
+
+  return
+
+def mark_unmark_favorite_contact(contacts, index):
+  adjusted_index = index - 1
+  
+  name = contacts[adjusted_index]["name"]
+  contact_favorite = input("Enter YES/yes or NO/no to favorite: ")
+  
+  if adjusted_index >= 0 and adjusted_index < len(contacts):      
+    if(contact_favorite and contact_favorite.lower() == 'yes'):
+      contacts[adjusted_index]["favorite"] = True
+    else:
+      contacts[adjusted_index]["favorite"] = False
+        
+    print(f"\nContact {name} favorite sucessfully updated!")
   else:
     print(f"Contact index {index} is invalid!")
 
@@ -80,6 +98,9 @@ while True:
   elif choose == "3":
     index = int(input("Enter the Contact number to update: "))
     update_contacts(contacts, index)
+  elif choose == "4":
+    index = int(input("Enter the Contact number: "))
+    mark_unmark_favorite_contact(contacts, index)
   elif choose == "7":
     break
 
