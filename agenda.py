@@ -77,6 +77,24 @@ def mark_unmark_favorite_contact(contacts, index):
 
   return
 
+def show_favorite_contacts(contacts):
+  favorite_contacts = []
+
+  if(len(contacts) != 0):
+    print("\nFavorites Contacts List")
+    for contact in contacts:
+      if(contact["favorite"]):
+        favorite_contacts.append(contact);
+
+    for index, favorite_contact in enumerate(favorite_contacts, start=1):
+      if(favorite_contact["favorite"]):
+        favorite = "★" if favorite_contact["favorite"] else " "
+        name = favorite_contact["name"]
+        print(f"{index}. [{favorite}] {name}") 
+  else:
+     print(f"\nNo Contacts found. Please, type 1 to create new Contact!")
+
+  return
 
 contacts = [];
 while True:
@@ -89,7 +107,7 @@ while True:
   print("  6. Delete Contact")
   print("  7. Quit")
 
-  choose = input("Choose an option: ")
+  choose = input("\nChoose an option: ")
 
   if choose == "1":
     create_contact(contacts)
@@ -101,6 +119,8 @@ while True:
   elif choose == "4":
     index = int(input("Enter the Contact number: "))
     mark_unmark_favorite_contact(contacts, index)
+  elif choose == "5":
+    show_favorite_contacts(contacts)
   elif choose == "7":
     break
 
