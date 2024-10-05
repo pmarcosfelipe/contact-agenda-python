@@ -23,13 +23,17 @@ def create_contact(contacts):
   return
 
 def show_contacts(contacts):
-  print("\nContact List")
-  for index, contact in enumerate(contacts, start = 1):
-    favorite = "★" if contact["favorite"] else " "
-    name = contact["name"]
-    phone = contact["phone"]
-    email = contact["email"]
-    print(f"{index}. [{favorite}] {name} {phone} {email}")
+  if(len(contacts) != 0):
+    print("\nContact List")
+    for index, contact in enumerate(contacts, start = 1):
+      favorite = "★" if contact["favorite"] else " "
+      name = contact["name"]
+      phone = contact["phone"]
+      email = contact["email"]
+      print(f"{index}. [{favorite}] {name} {phone} {email}")
+  else:
+    print("\nContact List is empty!")
+
   return
 
 def update_contacts(contacts, index):
@@ -96,6 +100,15 @@ def show_favorite_contacts(contacts):
 
   return
 
+def delete_contact(contacts, index):
+  adjusted_index = index - 1
+
+  if adjusted_index >= 0 and adjusted_index < len(contacts):
+    contacts.remove(contacts[adjusted_index])
+    print("\nContact sucessfully deleted!")
+ 
+  return
+
 contacts = [];
 while True:
   print("\nMenu Contact Agenda")
@@ -111,16 +124,23 @@ while True:
 
   if choose == "1":
     create_contact(contacts)
+    show_contacts(contacts)
   elif choose == "2":
     show_contacts(contacts)
   elif choose == "3":
     index = int(input("Enter the Contact number to update: "))
     update_contacts(contacts, index)
+    show_contacts(contacts)
   elif choose == "4":
     index = int(input("Enter the Contact number: "))
     mark_unmark_favorite_contact(contacts, index)
+    show_contacts(contacts)
   elif choose == "5":
     show_favorite_contacts(contacts)
+  elif choose == "6":
+    index = int(input("Enter the Contact number to delete: "))
+    delete_contact(contacts, index)
+    show_contacts(contacts)
   elif choose == "7":
     break
 
